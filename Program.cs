@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Mini_Core_FiltroFechas.Data;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<MiniCoreGastosContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConStr")));
 
 var app = builder.Build();
 
