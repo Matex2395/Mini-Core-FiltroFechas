@@ -1,8 +1,46 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Filtrar y Calcular Gastos";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Filtrar y Calcular Gastos</h1>
+
+<h3>Mateo Rosero</h3>
+
+<p>Seleccione un rango de fechas para filtrar los gastos y calcular el total por departamento.</p>
+
+<form asp-action="FiltrarGastos" method="post">
+    <div class="form-group">
+        <label for="fechaInicio">Fecha Inicio:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="fechaFin">Fecha Fin:</label>
+        <input type="date" id="fechaFin" name="fechaFin" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
+@if (ViewBag.Resultado != null)
+{
+    <h2>Resultados</h2>
+    <p>Gastos del <strong>@ViewBag.FechaInicio</strong> al <strong>@ViewBag.FechaFin</strong></p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Departamento</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Resultado)
+            {
+                <tr>
+                    <td>@item.Departamento</td>
+                    <td>@item.Total.ToString("C", new System.Globalization.CultureInfo("en-US"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

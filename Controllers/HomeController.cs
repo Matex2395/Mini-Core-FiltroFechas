@@ -34,7 +34,7 @@ namespace Mini_Core_FiltroFechas.Controllers
             if (fechaInicio > fechaFin)
             {
                 ModelState.AddModelError("", "La fecha de inicio no puede ser mayor a la fecha de fin.");
-                return View();
+                return View("Index");
             }
 
             var resultado = await _context.Gastos
@@ -51,7 +51,7 @@ namespace Mini_Core_FiltroFechas.Controllers
             ViewBag.FechaInicio = fechaInicio;
             ViewBag.FechaFin = fechaFin;
 
-            return View();
+            return View("Index");
         }
     }
 }
